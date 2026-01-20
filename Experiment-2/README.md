@@ -1,6 +1,6 @@
 # Experiment–2: Reusable UI Components in React
 
-## Learning Outcomes
+## 🎯 Learning Outcomes
 After completing this experiment, the student will be able to:
 
 - Understand the concept of reusable UI components in React  
