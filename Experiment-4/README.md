@@ -1,16 +1,25 @@
-# React + Vite
+## Experiment Details
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This experiment focuses on understanding and implementing different state management approaches in a React application:
 
-Currently, two official plugins are available:
+- **Local State Management**  
+  Implemented component-level state using the `useState` hook to manage UI-specific and temporary data such as form inputs, toggles, and component behavior.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Global State Management**  
+  Implemented shared state across multiple components using:
+  - **Context API** to avoid prop drilling and enable centralized state access.
+  - **Redux** to manage complex application state in a predictable and scalable manner.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Learning Outcomes
 
-## Expanding the ESLint configuration
+By completing this experiment, the following learning outcomes were achieved:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Gained a clear understanding of **local state management in React** using the `useState` hook and learned when to use local state for component-specific data.
+
+- Learned the concepts of **global state management** and identified scenarios where shared state is required across multiple components.
+
+- Understood the fundamentals of **Redux**, including stores, actions, reducers, and the unidirectional data flow model.
+
+- Improved overall understanding of **state flow, data sharing, and component communication** within modern React applications.
