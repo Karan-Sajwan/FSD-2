@@ -1,0 +1,63 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+/* Common card style */
+.card {
+  width: 80%;
+  margin: 20px auto;
+  padding: 25px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Section colors */
+.local {
+  background-color: #dbeeff; /* light blue */
+}
+
+.context {
+  background-color: #dbffe6; /* light green */
+}
+
+.redux {
+  background-color: #ffe4d4; /* light orange */
+}
+
+/* Buttons */
+.btn-group {
+  margin-top: 15px;
+}
+
+.btn-group button {
+  margin: 0 10px;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Button variations */
+.local button {
+  background-color: #1976d2;
+  color: white;
+}
+
+.context button {
+  background-color: #c8f3dc;
+  color: #0a5f3c;
+  border: 1px solid #6fd3a7;
+}
+
+.redux button {
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+}
+
+/* Headings */
+h2 {
+  text-align: center;
+  margin-top: 20px;
+}
