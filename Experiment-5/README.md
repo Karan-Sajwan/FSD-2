@@ -79,4 +79,3 @@ They will analyze metrics such as:
 - User-perceived responsiveness
 
 This enables validation of optimization techniques like code splitting and lazy loading.
-
