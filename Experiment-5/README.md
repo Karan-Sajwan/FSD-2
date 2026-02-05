@@ -1,16 +1,82 @@
-# React + Vite
+# Frontend Performance Optimization – Learning Outcomes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This module focuses on understanding and applying modern frontend performance optimization techniques using React. By the end of this module, learners will be able to analyze performance issues, implement lazy loading, and measure improvements in real-world Single Page Applications (SPAs).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📌 Learning Outcomes
 
-## React Compiler
+### 1. Understand Frontend Performance Issues
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Learners will be able to identify common frontend performance bottlenecks such as:
 
-## Expanding the ESLint configuration
+- Large JavaScript bundle sizes
+- Unnecessary component re-renders
+- Blocking resources during page load
+- Inefficient state and component design
+- Slow network and API calls
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+They will understand how these issues affect:
+
+- Page load time
+- Time to Interactive (TTI)
+- User experience and responsiveness
+- Business metrics like bounce rate and user retention
+
+---
+
+### 2. Explain Code Splitting
+
+Learners will be able to explain **code splitting** as a performance optimization technique that:
+
+- Breaks a large JavaScript bundle into smaller chunks
+- Loads code only when required (on-demand)
+- Reduces initial load time
+- Improves scalability of Single Page Applications
+
+They will understand its role in modern frontend architectures and routing-based loading.
+
+---
+
+### 3. Implement `React.lazy()`
+
+Learners will be able to implement **`React.lazy()`** to:
+
+- Dynamically import React components
+- Defer loading of non-critical UI components
+- Optimize application performance
+- Improve initial render time
+
+They will apply lazy loading effectively in real-world React applications.
+
+---
+
+### 4. Use `Suspense` Fallback UI
+
+Learners will be able to use **`Suspense`** to:
+
+- Display fallback UI such as loaders or placeholders
+- Handle asynchronous component loading gracefully
+- Prevent blank screens during lazy loading
+
+They will understand how fallback UIs improve perceived performance and user experience.
+
+---
+
+### 5. Measure Performance Improvement
+
+Learners will be able to measure and evaluate frontend performance improvements using:
+
+- Browser Developer Tools
+- Lighthouse audits
+- Performance profiling tools
+
+They will analyze metrics such as:
+
+- Bundle size
+- Page load time
+- Render time
+- User-perceived responsiveness
+
+This enables validation of optimization techniques like code splitting and lazy loading.
+
