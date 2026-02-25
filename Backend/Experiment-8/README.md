@@ -20,7 +20,7 @@ To develop RESTful APIs using **Python Flask** for performing **CRUD operations 
   Removes a student with the given `id` from the in‑memory list and returns the deleted data.
    ![alt text](<Screenshot 2026-02-25 103145.png>)
 ---
-## Learning Outcomes
+## 🎯 Learning Outcomes
 
 - Understood how to **set up and configure a Flask application** for building RESTful APIs.  
 - Learned to map **HTTP methods (GET, POST, PUT, DELETE)** to corresponding **CRUD operations** on a Student resource.   
