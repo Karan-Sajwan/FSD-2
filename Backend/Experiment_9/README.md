@@ -13,9 +13,9 @@ This project is a Flask-based backend that demonstrates multiple authentication 
 - Using Postman **Bearer Token** auth to call `GET /jwt-protected` with the received JWT and getting the message: `JWT Auth Success. Welcome admin!`.
 ![alt text](<Screenshot 2026-02-27 104917.png>)
 ---
-## Learning Outcome
-- Learnt about backend technologies
-- Learnt to create virtual enviroment of python using venv
-- Leant to code in flask
-- Learnt about flask in python
-- Learnt to route in flask
+## Learning Outcomes
+- Implement HTTP Basic Authentication in a Flask API and verify credentials using the `Authorization` header.
+- Build a custom token-based authentication flow using a login endpoint that returns a token and a protected route that validates this token from a custom request header.
+- Use JSON Web Tokens (JWT) with `flask-jwt-extended` to create access tokens and protect routes with decorators like `@jwt_required()`.
+- Configure and use different authorization mechanisms in Postman (Basic Auth, Bearer Token, and custom header) to test secured API endpoints.
+- Deploy a Flask authentication API to a cloud platform (Render) and test the same authentication flows in a production-like environment.
