@@ -3,15 +3,15 @@
 
 ## List of Experiments
 
-- **Experiment No. 1:** Create a basic SPA using modern frontend framework --> [Experiment-1]
-- **Experiment No. 2:** Design UI using component libraries (Material UI / Bootstrap) --> [Experiment-2]
-- **Experiment No. 3:** Implement routing in SPA  --> [Experiment-3]
-- **Experiment No. 4:** Implement state management using Redux / Context API --> [Experiment-4]
-- **Experiment No. 5:** Optimize frontend performance using lazy loading  --> [Experiment-5]
-- **Experiment No. 6:** Handle forms and validations in frontend  --> [Experiment-6]
-- **Experiment No. 7:** Analyze frontend performance using browser dev tools --> [Only readme file]
-- **Experiment No. 8:** Develop RESTful APIs using backend framework  --> [Experiment-8 Render Link]
-- **Experiment No. 9:** Implement authentication using JWT  --> [Experiment-9 Render Link]
+- **Experiment No. 1:** Create a basic SPA using modern frontend framework 
+- **Experiment No. 2:** Design UI using component libraries (Material UI / Bootstrap) 
+- **Experiment No. 3:** Implement routing in SPA  
+- **Experiment No. 4:** Implement state management using Redux / Context API 
+- **Experiment No. 5:** Optimize frontend performance using lazy loading  
+- **Experiment No. 6:** Handle forms and validations in frontend  
+- **Experiment No. 7:** Analyze frontend performance using browser dev tools 
+- **Experiment No. 8:** Develop RESTful APIs using backend framework  
+- **Experiment No. 9:** Implement authentication using JWT  
 - **Experiment No. 10:** Implement role-based authorization  
 - **Experiment No. 11:** Develop microservice-based backend module  
 - **Experiment No. 12:** Implement real-time communication using WebSockets  
