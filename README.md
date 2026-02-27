@@ -1,4 +1,4 @@
-# [<i>AP</i> Full Stack-2 (Semester 6)](https://github.com/Karan-Sajwan/FSD-2.git)
+# [<i>FSD</i> Full Stack-2 (Semester 6)](https://github.com/Karan-Sajwan/FSD-2.git)
 ### Karan Sajwan (23BIS70054)
 
 ## List of Experiments
