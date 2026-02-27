@@ -1,69 +1,30 @@
-## Experiment No. 8 - Develop RESTful APIs using Backend Framework (Flask)
+# Authentication Experiments API
 
-## Project Structure
+This project is a Flask-based backend that demonstrates multiple authentication mechanisms and how to protect API routes using them. It is deployed on Render and tested using Postman.
 
-```bash
-Experiment_9/
-├── venv/
-│   ├── Include/
-│   ├── Lib/
-│   └── Scripts/
-├── requiement.txt
-├── app.py
-└── README.md
-```
+## Features
 
-## JWT Methods
-|Method      | Header Used           | Stateless? | Secure?     |
-|------------|---------------------|----------|----------- |
-| Basic Auth   | Authorization         | Yes        | Weak      |
-| Base64 Token | x-auth-token          | Yes        | Very Weak |
-| JWT          | Authorization: Bearer | Yes        | ✅ Strong    |
+- Basic Authentication protected route (`/basic-protected`)
+- Custom token-based authentication using a custom header (`/token-login`, `/token-protected`)
+- JWT-based authentication using `flask-jwt-extended` (`/jwt-login`, `/jwt-protected`)
+- Clear JSON success messages for each authentication method
+- Ready to use with Postman or any HTTP client
 
+## Tech Stack
 
-## STEPS & SCREENSHOTS
-### 1. Server Start & Running
-![Server Running](Screenshots/1.png)
-Render development server successfully started.
+- **Language:** Python
+- **Framework:** Flask
+- **Authentication:**
+  - Basic Auth (username/password in `Authorization` header)
+  - Custom token authentication (token in `x-auth-token` header)
+  - JWT authentication using `flask-jwt-extended`
+- **Deployment:** Render
+- **API Testing:** Postman
 
-### 2. READ ALL Students (GET)
-![Root Endpoint](Screenshots/2.png)
+Base URL (Render):
 
-Not added any student data till now
-
-### 3. CREATE Student (POST)
-![Create Student 1](Screenshots/3.png)
-
-### Create Another Student
-![Create Student 2](Screenshots/4.png)
-
-### 4. READ ALL Students (GET)
-![Read All Students](Screenshots/5.png)
-
-### 5. READ ONE Student
-### GET Student ID = 1
-![Read One - ID 1](Screenshots/6.png)
-
-### GET Student ID = 2
-![Read One - ID 2](Screenshots/7.png)
-
-### 6. UPDATE Student (PUT)
-![Update Student](Screenshots/8.png)
-
-### 7. DELETE Student
-![Delete Student](Screenshots/9.png)
-### READ After Deletion
-![Read After Delete](Screenshots/10.png)
-
-
-## API Endpoints Summary
-| Method | Endpoint | Description |
-|--------|----------|------------|
-| POST   | /students | Create new student |
-| GET    | /students | Get all students |
-| GET    | /students/<id> | Get student by ID |
-| PUT    | /students/<id> | Update student |
-| DELETE | /students/<id> | Delete student |
+```text
+https://experiment-9-23bis70054.onrender.com
 
 ## Learning Outcome
 - Learnt about backend technologies
