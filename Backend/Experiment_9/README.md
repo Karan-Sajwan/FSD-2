@@ -18,7 +18,7 @@ This project is a Flask-based backend that demonstrates multiple authentication 
 
 ![alt text](<Screenshot 2026-02-27 104917.png>)
 ---
-## Learning Outcomes
+## 🎯 Learning Outcomes
 - Implement HTTP Basic Authentication in a Flask API and verify credentials using the `Authorization` header.
 - Build a custom token-based authentication flow using a login endpoint that returns a token and a protected route that validates this token from a custom request header.
 - Use JSON Web Tokens (JWT) with `flask-jwt-extended` to create access tokens and protect routes with decorators like `@jwt_required()`.
