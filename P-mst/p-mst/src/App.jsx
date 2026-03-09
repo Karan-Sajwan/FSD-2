@@ -12,7 +12,7 @@ function App() {
 
   return (
     <div style={{textAlign:"center", marginTop:"50px"}}>
-      <h1>Shopping Cart Example</h1>
+      <h1>Shopping Cart </h1>
 
       <CartIndicator count={cartCount} />
 
