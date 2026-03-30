@@ -195,25 +195,17 @@ if __name__ == "__main__":
 
 ## Screenshots
 
-### 1. Customer Service Running
+![Customer Service](Screenshots\1.png)
 
-![Customer Service](Backend/Experiment-11/Screenshots/Screenshot 2026-03-30 103248.png)
+![User 101 Orders](Screenshots\2.png)
 
-### 2. Order Service Running
+![User 102 Orders](Screenshots\3.png)
 
-![User 101 Orders](Screenshots/2.png)
+![Update Status](Screenshots\4.png)
 
-### 3. Fetch Orders (User 101)
+![Order Service](Screenshots\5.png)
 
-![User 102 Orders](Screenshots/3.png)
-
-### 4. Fetch Orders (User 102)
-
-![Update Status](Screenshots/4.png)
-
-### 5. Update Order Status
-
-![Order Service](Screenshots/5.png)
+![Order Service](Screenshots\6.png)
 
 ## Learning Outcomes
 
