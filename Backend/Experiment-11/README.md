@@ -195,7 +195,6 @@ if __name__ == "__main__":
 
 ## Screenshots
 
-### 1. Customer Service Running
 ![Customer Service](Screenshots\1.png)
 
 ![User 101 Orders](Screenshots\2.png)
