@@ -197,7 +197,7 @@ if __name__ == "__main__":
 
 ### 1. Customer Service Running
 
-![Customer Service](c:\Users\Karam Sajwan\OneDrive\Pictures\Screenshots 1\Screenshot 2026-03-30 103248.png)
+![Customer Service](Backend/Experiment-11/Screenshots/Screenshot 2026-03-30 103248.png)
 
 ### 2. Order Service Running
 
