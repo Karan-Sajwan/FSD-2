@@ -193,7 +193,7 @@ if __name__ == "__main__":
 3. Calls Order Service API
 4. Combines response and returns JSON
 
-## Screenshots
+### Screenshots
 
 ![Customer Service](Screenshots\1.png)
 
