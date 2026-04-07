@@ -1,130 +1,196 @@
-import os
 from flask import Flask, request, jsonify
-from flask_mysqldb import MySQL
+from flask_sqlalchemy import SQLAlchemy
+from marshmallow import Schema, fields, validate, ValidationError
+from sqlalchemy.exc import IntegrityError
+import os
 
 app = Flask(__name__)
 
-# -----------------------------
-# DATABASE CONFIG (ENV BASED)
-# -----------------------------
-app.config['MYSQL_HOST'] = os.getenv('MYSQL_HOST')
-app.config['MYSQL_USER'] = os.getenv('MYSQL_USER')
-app.config['MYSQL_PASSWORD'] = os.getenv('MYSQL_PASSWORD')
-app.config['MYSQL_DB'] = os.getenv('MYSQL_DB')
+# ===============================
+# DATABASE CONFIG (Render PostgreSQL)
+# ===============================
+db_url = os.getenv("DATABASE_URL")  # ✅ correct usage
 
-mysql = MySQL(app)
+# Fix Render PostgreSQL URL issue
+if db_url and db_url.startswith("postgres://"):
+    db_url = db_url.replace("postgres://", "postgresql://")
 
-# -----------------------------
+# fallback for local testing
+if not db_url:
+    db_url = "sqlite:///students.db"
+
+app.config['SQLALCHEMY_DATABASE_URI'] = db_url
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+# ===============================
+# MODEL
+# ===============================
+class Student(db.Model):
+    __tablename__ = "students"
+
+    id = db.Column(db.Integer, primary_key=True)
+    uid = db.Column(db.String(20), unique=True, nullable=False)
+    name = db.Column(db.String(100), nullable=False)
+    age = db.Column(db.Integer, nullable=False)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "uid": self.uid,
+            "name": self.name,
+            "age": self.age
+        }
+
+# ===============================
+# SCHEMA
+# ===============================
+class StudentSchema(Schema):
+    name = fields.Str(required=True, validate=validate.Length(min=2))
+    age = fields.Int(required=True, validate=validate.Range(min=1, max=120))
+    uid = fields.Str(required=True, validate=validate.Length(min=3))
+
+student_schema = StudentSchema()
+student_update_schema = StudentSchema(partial=True)
+
+# ===============================
+# ERROR HANDLERS
+# ===============================
+@app.errorhandler(ValidationError)
+def handle_validation_error(e):
+    return jsonify({
+        "status": "error",
+        "errors": e.messages
+    }), 400
+
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({"status": "error", "message": "Resource not found"}), 404
+
+@app.errorhandler(500)
+def server_error(e):
+    return jsonify({"status": "error", "message": "Internal Server Error"}), 500
+
+# ===============================
 # ROUTES
-# -----------------------------
-
-# Home route (IMPORTANT for Render health check)
+# ===============================
 @app.route('/')
 def home():
-    return jsonify({"message": "API is running"})
+    return jsonify({
+        "status": "success",
+        "message": "Student API Running 🚀"
+    })
 
+# Health check (important for Render)
+@app.route('/health')
+def health():
+    return jsonify({"status": "OK"}), 200
+
+# ===============================
 # CREATE
-@app.route('/add', methods=['POST'])
-def add_student():
-    data = request.get_json()
+# ===============================
+@app.route('/students', methods=['POST'])
+def create_student():
+    try:
+        data = request.get_json()
+        validated_data = student_schema.load(data)
 
-    name = data.get('name')
-    email = data.get('email')
-    age = data.get('age')
+        student = Student(**validated_data)
+        db.session.add(student)
+        db.session.commit()
 
-    # Validation
-    if not name or not email or not age:
-        return jsonify({"error": "All fields are required"}), 400
+        return jsonify({
+            "status": "success",
+            "data": student.to_dict()
+        }), 201
 
-    cur = mysql.connection.cursor()
-    cur.execute(
-        "INSERT INTO student (name, email, age) VALUES (%s, %s, %s)",
-        (name, email, age)
-    )
-    mysql.connection.commit()
-    cur.close()
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({
+            "status": "error",
+            "message": "UID already exists"
+        }), 400
 
-    return jsonify({"message": "Student added successfully"}), 201
-
-
-# READ (ALL)
+# ===============================
+# READ ALL (Pagination)
+# ===============================
 @app.route('/students', methods=['GET'])
 def get_students():
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM student")
-    rows = cur.fetchall()
-    cur.close()
+    page = request.args.get('page', 1, type=int)
+    limit = request.args.get('limit', 5, type=int)
 
-    students = []
-    for row in rows:
-        students.append({
-            "id": row[0],
-            "name": row[1],
-            "email": row[2],
-            "age": row[3]
+    students = Student.query.paginate(page=page, per_page=limit, error_out=False)
+
+    return jsonify({
+        "status": "success",
+        "total": students.total,
+        "page": page,
+        "data": [s.to_dict() for s in students.items]
+    })
+
+# ===============================
+# READ ONE
+# ===============================
+@app.route('/students/<int:id>', methods=['GET'])
+def get_student(id):
+    student = Student.query.get_or_404(id)
+    return jsonify({
+        "status": "success",
+        "data": student.to_dict()
+    })
+
+# ===============================
+# UPDATE
+# ===============================
+@app.route('/students/<int:id>', methods=['PUT'])
+def update_student(id):
+    try:
+        student = Student.query.get_or_404(id)
+        data = request.get_json()
+
+        validated_data = student_update_schema.load(data)
+
+        for key, value in validated_data.items():
+            setattr(student, key, value)
+
+        db.session.commit()
+
+        return jsonify({
+            "status": "success",
+            "data": student.to_dict()
         })
 
-    return jsonify(students)
+    except IntegrityError:
+        db.session.rollback()
+        return jsonify({
+            "status": "error",
+            "message": "UID already exists"
+        }), 400
 
-
-# READ (ONE)
-@app.route('/student/<int:id>', methods=['GET'])
-def get_student(id):
-    cur = mysql.connection.cursor()
-    cur.execute("SELECT * FROM student WHERE id = %s", (id,))
-    row = cur.fetchone()
-    cur.close()
-
-    if not row:
-        return jsonify({"error": "Student not found"}), 404
-
-    student = {
-        "id": row[0],
-        "name": row[1],
-        "email": row[2],
-        "age": row[3]
-    }
-
-    return jsonify(student)
-
-
-# UPDATE
-@app.route('/update/<int:id>', methods=['PUT'])
-def update_student(id):
-    data = request.get_json()
-
-    name = data.get('name')
-    email = data.get('email')
-    age = data.get('age')
-
-    if not name or not email or not age:
-        return jsonify({"error": "All fields are required"}), 400
-
-    cur = mysql.connection.cursor()
-    cur.execute(
-        "UPDATE student SET name=%s, email=%s, age=%s WHERE id=%s",
-        (name, email, age, id)
-    )
-    mysql.connection.commit()
-    cur.close()
-
-    return jsonify({"message": "Student updated successfully"})
-
-
+# ===============================
 # DELETE
-@app.route('/delete/<int:id>', methods=['DELETE'])
+# ===============================
+@app.route('/students/<int:id>', methods=['DELETE'])
 def delete_student(id):
-    cur = mysql.connection.cursor()
-    cur.execute("DELETE FROM student WHERE id=%s", (id,))
-    mysql.connection.commit()
-    cur.close()
+    student = Student.query.get_or_404(id)
 
-    return jsonify({"message": "Student deleted successfully"})
+    db.session.delete(student)
+    db.session.commit()
 
+    return jsonify({
+        "status": "success",
+        "message": "Deleted successfully"
+    })
 
-# -----------------------------
-# RUN SERVER (RENDER COMPATIBLE)
-# -----------------------------
+# ===============================
+# CREATE TABLES
+# ===============================
+with app.app_context():
+    db.create_all()
+
+# ===============================
+# RUN (local only)
+# ===============================
 if __name__ == '__main__':
-    port = int(os.environ.get("PORT", 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(debug=True)
