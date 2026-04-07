@@ -9,7 +9,7 @@ app = Flask(__name__)
 # ===============================
 # DATABASE CONFIG (Render PostgreSQL)
 # ===============================
-db_url = os.getenv("DATABASE_URL")  # ✅ correct usage
+db_url = os.getenv("http://127.0.0.1:5000")  # ✅ correct usage
 
 # Fix Render PostgreSQL URL issue
 if db_url and db_url.startswith("postgres://"):
@@ -17,7 +17,7 @@ if db_url and db_url.startswith("postgres://"):
 
 # fallback for local testing
 if not db_url:
-    db_url = "sqlite:///students.db"
+    db_url = "mysql+mysqlconnector://root:Karan.7654@localhost/student_db"
 
 app.config['SQLALCHEMY_DATABASE_URI'] = db_url
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
