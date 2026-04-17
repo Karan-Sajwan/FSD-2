@@ -136,33 +136,6 @@ npx vitest
 
 ---
 
-## ⚠️ Challenges Faced
-
-### 1. Material UI Label Issues
-
-- MUI generates complex DOM structure
-- Caused multiple matches in tests
-
-### 2. Query Conflicts
-
-- "Name" and "University Name" caused ambiguity
-
-### ✔️ Solution
-
-- Used `getAllByRole()` instead of `getByLabelText()`
-- Indexed elements properly
-
----
-
-## 🧪 Example Frontend Test
-
-```javascript
-const name = screen.getAllByRole("textbox", { name: /name/i })[0];
-fireEvent.change(name, { target: { value: "John Doe" } });
-```
-
----
-
 # 📸 Screenshots
 
 ### Backend Server Test
