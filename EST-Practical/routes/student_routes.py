@@ -11,7 +11,7 @@ def get_students():
     return jsonify(students)
 
 @student_bp.route("/<int:student_id>", methods=["GET"])
-def delete_student(student_id):
+def delete_student1(student_id):
     for i, s in enumerate(students):
         if s["id"] == student_id:
             deleted = students.pop(i)
