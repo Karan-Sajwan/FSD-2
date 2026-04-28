@@ -11,10 +11,11 @@ def get_students():
     return jsonify(students)
 
 @student_bp.route("/<int:student_id>", methods=["GET"])
-def get_student(student_id):
-    for s in students:
+def delete_student(student_id):
+    for i, s in enumerate(students):
         if s["id"] == student_id:
-            return jsonify(s)
+            deleted = students.pop(i)
+            return jsonify(deleted)
     return {"error": "Student not found"}, 404
 
 @student_bp.route("/", methods=["POST"])
